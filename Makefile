@@ -1,7 +1,7 @@
 # Top level control for managing the dev work
 
 # ----- Project Macro ----- #
-UnitTestCategory := CrytalTest
+UnitTestCategory := CrystalTest
 UnitTestName := SCDCalibratePanels2Test
 TestScript := test.py
 
