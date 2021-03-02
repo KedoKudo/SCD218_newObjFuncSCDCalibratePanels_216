@@ -32,7 +32,7 @@ SCDCalibratePanels(
     gamma=natrolite.gamma,
     CalibrateT0=False,
     CalibrateL1=True,
-    CalibrateBanks=True,
+    CalibrateBanks=False,
     OutputWorkspace="testCaliTable",
     DetCalFilename=directory + "/test.DetCal",
     CSVFilename=directory + "/test.csv",
