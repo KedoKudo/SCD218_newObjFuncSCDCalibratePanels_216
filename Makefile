@@ -17,7 +17,7 @@ MANTIDDIR := $(mkfile_top)/mantid
 BUILDDIR  := $(mkfile_top)/build
 INTALLDIR := $(mkfile_top)/opt/mantid
 HOSTNAME  := $(shell hostname)
-BASEOPTS  := -GNinja -DENABLE_MANTIDPLOT=OFF -DCMAKE_INSTALL_PREFIX=$(INTALLDIR)
+BASEOPTS  := -GNinja -DENABLE_MANTIDPLOT=OFF -DCMAKE_INSTALL_PREFIX=$(INTALLDIR) -DCMAKE_BUILD_TYPE=Debug
 
 # ----- BUILD OPTIONS -----
 ifneq (,$(findstring analysis,$(HOSTNAME)))
@@ -28,7 +28,7 @@ ifneq (,$(findstring analysis,$(HOSTNAME)))
 else
 	CMKOPTS := $(BASEOPTS)
 	CMKCMDS := cmake $(MANTIDDIR) $(CMKOPTS)
-	BLDCMDS := ninja -j4 all $(UnitTestCategory) && ninja install ; true
+	BLDCMDS := ninja -j3 all $(UnitTestCategory) && ninja install ; true
 endif
 
 # ----- UNIT TEST -----
@@ -52,6 +52,10 @@ build:
 unittest:
 	@echo "run unittest"
 	@cd $(BUILDDIR); $(UNTCMDS)
+
+gdbunittest:
+	@echo "run unittest with gdb"
+	@cd $(BUILDDIR)/bin; gdb --args CrystalTest SCDCalibratePanels2Test
 
 docs:
 	@echo "build html docs"
